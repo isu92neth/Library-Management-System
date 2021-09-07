@@ -1,9 +1,18 @@
 import { Header, Main, Footer } from "./components/Layout";
-
+import { NavBar, NavItem, NavLink } from "./components/Navbar";
 function App() {
   return (
     <>
-      <Header>This is the Header</Header>
+      <Header>
+        <NavBar>
+          <NavItem href="#">
+            <NavLink>Catalog</NavLink>
+          </NavItem>
+          <NavItem href="#">
+            <NavLink>Dashboard</NavLink>
+          </NavItem>
+        </NavBar>
+      </Header>
       <Main>This is the Main</Main>
       <Footer>This is the Footer</Footer>
     </>
