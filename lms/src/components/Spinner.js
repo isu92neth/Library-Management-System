@@ -23,10 +23,10 @@ const SpinnerContainer = styled.div`
   align-items: flex-start;
 `;
 
-const Spinner = () => {
+const Spinner = () => (
   <SpinnerContainer>
     <SpinningDiv />
-  </SpinnerContainer>;
-};
+  </SpinnerContainer>
+);
 
 export default Spinner;
