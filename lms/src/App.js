@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { ThemeProvider } from "styled-components";
 import { BsBookHalf } from "react-icons/bs";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Header, Main, Footer } from "./components/Layout";
 import { NavBar, NavItem, NavLink } from "./components/Navbar";
@@ -41,16 +41,16 @@ function App() {
     <ThemeProvider theme={theme}>
       <Header>
         <NavBar>
-          <NavItem href="#">
-            <NavLink>
+          <NavItem>
+            <NavLink href={CATALOG}>
               <BsBookHalf />
             </NavLink>
           </NavItem>
-          <NavItem href="#">
-            <NavLink>Catalog</NavLink>
+          <NavItem>
+            <NavLink href={CATALOG}>Catalog</NavLink>
           </NavItem>
-          <NavItem href="#">
-            <NavLink>Dashboard</NavLink>
+          <NavItem>
+            <NavLink href={DASHBOARD}>Dashboard</NavLink>
           </NavItem>
         </NavBar>
       </Header>
