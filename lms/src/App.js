@@ -1,9 +1,11 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import { BsBookHalf } from "react-icons/bs";
 
 import { Main, Footer } from "./components/Layout";
 import { NavBar, NavItem, NavLink } from "./components/Navbar";
-import { BsBookHalf } from "react-icons/bs";
+
+import Dashboard from "./containers/Dashboard";
 
 function App() {
   const theme = {
@@ -33,7 +35,10 @@ function App() {
         </NavItem>
       </NavBar>
 
-      <Main>This is the Main</Main>
+      <Main>
+        This is the Main
+        <Dashboard />
+      </Main>
       <Footer>This is the Footer</Footer>
     </ThemeProvider>
   );
