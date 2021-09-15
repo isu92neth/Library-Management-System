@@ -2,7 +2,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { BsBookHalf } from "react-icons/bs";
 
-import { Main, Footer } from "./components/Layout";
+import { Header, Main, Footer } from "./components/Layout";
 import { NavBar, NavItem, NavLink } from "./components/Navbar";
 
 import Dashboard from "./containers/Dashboard";
@@ -18,25 +18,27 @@ function App() {
     secondary: {
       main: "#fff",
     },
+    spacing: (factor) => `${factor * 8}px`,
   };
   return (
     <ThemeProvider theme={theme}>
-      <NavBar>
-        <NavItem href="#">
-          <NavLink>
-            <BsBookHalf />
-          </NavLink>
-        </NavItem>
-        <NavItem href="#">
-          <NavLink>Catalog</NavLink>
-        </NavItem>
-        <NavItem href="#">
-          <NavLink>Dashboard</NavLink>
-        </NavItem>
-      </NavBar>
+      <Header>
+        <NavBar>
+          <NavItem href="#">
+            <NavLink>
+              <BsBookHalf />
+            </NavLink>
+          </NavItem>
+          <NavItem href="#">
+            <NavLink>Catalog</NavLink>
+          </NavItem>
+          <NavItem href="#">
+            <NavLink>Dashboard</NavLink>
+          </NavItem>
+        </NavBar>
+      </Header>
 
       <Main>
-        This is the Main
         <Dashboard />
       </Main>
       <Footer>Copyright {new Date().getFullYear()} @Spark Academy</Footer>

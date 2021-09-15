@@ -3,10 +3,14 @@ import styled from "styled-components";
 export const NavBar = styled.ul`
   list-style: none;
   margin: 0;
-  padding: 1em 0;
+  padding: ${(props) => props.theme.spacing(1)} 0;
   overflow: hidden;
   background-color: ${(props) => props.theme.primary.main};
   width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  max-height: 5vh;
 `;
 
 export const NavItem = styled.li`
