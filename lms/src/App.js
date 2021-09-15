@@ -39,7 +39,7 @@ function App() {
         This is the Main
         <Dashboard />
       </Main>
-      <Footer>This is the Footer</Footer>
+      <Footer>Copyright {new Date().getFullYear()} @Spark Academy</Footer>
     </ThemeProvider>
   );
 }
