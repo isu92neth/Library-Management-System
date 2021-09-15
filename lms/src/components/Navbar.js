@@ -23,6 +23,7 @@ export const NavLink = styled.a`
   padding: 14px 16px;
   text-decoration: none;
   font-size: 1.25em;
+  cursor: pointer;
 
   :hover {
     background-color: ${(props) => props.theme.primary.light};
