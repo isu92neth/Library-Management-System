@@ -15,9 +15,17 @@ const Books = ({ catalog }) => {
       title: "react",
     },
   ];
+
+  const handleTableRowClick = (id) => {
+    console.log(id);
+  };
   return (
     <FluidContainer>
-      <Table data={catalog} />
+      <Table
+        data={upCatalog}
+        handleRowClick={handleTableRowClick}
+        instruction="Click row to view book!"
+      />
     </FluidContainer>
   );
 };
