@@ -18,6 +18,7 @@ const StyledTable = styled.table`
     }
     :hover {
       background-color: ${(props) => props.theme.primary.dark};
+      color: ${(props) => props.theme.hoverColor.textColor};
     }
   }
   thead > tr {
