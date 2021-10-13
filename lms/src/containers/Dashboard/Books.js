@@ -8,7 +8,6 @@ const Books = ({ catalog }) => {
   const [selectedBookId, setSelectedBookId] = useState(null);
 
   const handleTableRowClick = (id) => {
-    console.log(id);
     setSelectedBookId(id);
   };
 

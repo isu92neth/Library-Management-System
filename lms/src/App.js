@@ -20,9 +20,9 @@ const NotFound = React.lazy(() => {
 function App() {
   const theme = {
     primary: {
-      main: "#29b6f6",
-      light: "#73e8ff",
-      dark: "#0086c3",
+      main: "#329da8",
+      light: "#329da8",
+      dark: "#329da8",
       textColor: "#000",
       danger: "#e91e63",
       dangerDark: "#b0003a",

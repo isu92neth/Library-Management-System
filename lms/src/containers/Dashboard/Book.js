@@ -47,7 +47,7 @@ const Book = ({ id, handleBackClick }) => {
 
   return (
     <Container>
-      <Button onClick={handleBackClick}>
+      <Button onClick={handleBackClick} size={1.5}>
         <IoReturnUpBack />
       </Button>
       {!isLoading && book !== null ? (
@@ -75,7 +75,7 @@ const Book = ({ id, handleBackClick }) => {
               <img
                 src={BookCoverPlaceHplder}
                 alt="Book Cover Placeholder"
-                style={{ border: "1px solid black" }}
+                style={{ width: "20em" }}
               />
             </ContainerInline>
           </FlexRow>
