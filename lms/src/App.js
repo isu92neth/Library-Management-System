@@ -20,9 +20,9 @@ const NotFound = React.lazy(() => {
 function App() {
   const theme = {
     primary: {
-      main: "#17629c",
-      light: "#6ca2cc",
-      dark: "#1a4566",
+      main: "#1178c2",
+      light: "#63ace0",
+      dark: "#0d63a1",
       textColor: "#000",
       danger: "#e91e63",
       dangerDark: "#b0003a",
@@ -32,6 +32,9 @@ function App() {
       light: "#cfcfcf",
       dark: "#707070",
       textColor: "#000",
+    },
+    hoverColor: {
+      textColor: "#fff",
     },
     spacing: (factor) => `${factor * 8}px`,
   };

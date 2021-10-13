@@ -62,5 +62,6 @@ export const Button = styled.button`
           return props.theme.primary.dark;
       }
     }};
+    color: ${(props) => props.theme.hoverColor.textColor};
   }
 `;
