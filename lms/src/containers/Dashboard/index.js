@@ -3,20 +3,19 @@ import React, { useEffect, useState } from "react";
 import Tabs from "../../components/Tabs";
 import Spinner from "../../components/Spinner";
 
-import Books from "./Books";
+import Books from "./Books/index";
 
 import { getBooks } from "../../api/bookAPI";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
     getBooks()
       .then((response) => {
         if (!response.error) {
-          console.log(response.data);
           setBooks(response.data);
         }
       })
