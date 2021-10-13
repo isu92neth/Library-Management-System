@@ -7,11 +7,11 @@ import {
   Container,
   ContainerInline,
   FlexRow,
-} from "../../components/CommonComponents";
-import Spinner from "../../components/Spinner";
+} from "../../../components/CommonComponents";
+import Spinner from "../../../components/Spinner";
 
-import { getBook } from "../../api/bookAPI";
-import BookCoverPlaceHplder from "../../shared/bookCover.png";
+import { getBook } from "../../../api/bookAPI";
+import BookCoverPlaceHplder from "../../../shared/bookCover.png";
 
 const ContainerInlineTextAlignLeft = styled(ContainerInline)`
   align-items: flex-start;
