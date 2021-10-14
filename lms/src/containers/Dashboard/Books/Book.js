@@ -12,8 +12,9 @@ import Spinner from "../../../components/Spinner";
 import ConfirmationDialog from "../../../components/ConfirmationDialog";
 import LendDialog from "./LendDialog";
 
-import { getBook } from "../../../api/bookAPI";
+import { getBook, lendBook } from "../../../api/bookAPI";
 import BookCoverPlaceHplder from "../../../shared/bookCover.png";
+import { getTodayDate } from "../../../shared/utils";
 
 const ContainerInlineTextAlignLeft = styled(ContainerInline)`
   align-items: flex-start;
@@ -33,13 +34,6 @@ const Book = ({ id, handleBackClick }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showLendConfirmation, setShowLendConfirmation] = useState(false);
 
-  const handleDelete = (confirmation) => {
-    if (confirmation) {
-      console.log("Delete Confirmed");
-    }
-    setShowDeleteConfirmation(false);
-  };
-
   useEffect(() => {
     setIsLoading(true);
     getBook(id)
@@ -56,9 +50,16 @@ const Book = ({ id, handleBackClick }) => {
       });
   }, [id]);
 
-  const handleLend = (confirmed, member) => {
+  const handleDelete = (confirmation) => {
+    if (confirmation) {
+      console.log("Delete Confirmed");
+    }
+    setShowDeleteConfirmation(false);
+  };
+
+  const handleLend = (confirmed, memberId) => {
     if (confirmed) {
-      console.log("Book lended to", member);
+      lendBook(book.id, memberId, getTodayDate());
     }
     setShowLendConfirmation(false);
   };
