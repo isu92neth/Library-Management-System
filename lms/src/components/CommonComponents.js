@@ -69,7 +69,7 @@ export const Button = styled.button`
 export const Select = styled.select`
   height: 35px;
   background: white;
-  color: gray;
+  color: #75848f;
   padding: 0.5em;
   font-size: 0.8em;
   border: 2px solid ${(props) => props.theme.secondary.light};
