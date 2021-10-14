@@ -12,7 +12,12 @@ import Spinner from "../../../components/Spinner";
 import ConfirmationDialog from "../../../components/ConfirmationDialog";
 import LendDialog from "./LendDialog";
 
-import { getBook, lendBook, returnBook } from "../../../api/bookAPI";
+import {
+  getBook,
+  lendBook,
+  returnBook,
+  deleteBook,
+} from "../../../api/bookAPI";
 import BookCoverPlaceHplder from "../../../shared/bookCover.png";
 import { getTodayDate } from "../../../shared/utils";
 
@@ -53,7 +58,7 @@ const Book = ({ id, handleBackClick }) => {
 
   const handleDelete = (confirmation) => {
     if (confirmation) {
-      console.log("Delete Confirmed");
+      deleteBook(book.id);
     }
     setShowDeleteConfirmation(false);
   };
