@@ -12,7 +12,7 @@ import Spinner from "../../../components/Spinner";
 import ConfirmationDialog from "../../../components/ConfirmationDialog";
 import LendDialog from "./LendDialog";
 
-import { getBook, lendBook } from "../../../api/bookAPI";
+import { getBook, lendBook, returnBook } from "../../../api/bookAPI";
 import BookCoverPlaceHplder from "../../../shared/bookCover.png";
 import { getTodayDate } from "../../../shared/utils";
 
@@ -33,6 +33,7 @@ const Book = ({ id, handleBackClick }) => {
   const [book, setBook] = useState(null);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showLendConfirmation, setShowLendConfirmation] = useState(false);
+  const [showReturnConfirmation, setShowReturnConfirmation] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -62,6 +63,13 @@ const Book = ({ id, handleBackClick }) => {
       lendBook(book.id, memberId, getTodayDate());
     }
     setShowLendConfirmation(false);
+  };
+
+  const handleReturn = (confirmed) => {
+    if (confirmed) {
+      returnBook(book.id);
+    }
+    setShowReturnConfirmation(false);
   };
 
   return (
@@ -116,7 +124,7 @@ const Book = ({ id, handleBackClick }) => {
                 <>
                   <h4>{` Burrowed by: ${book.burrowedMemberId}`}</h4>
                   <h4>{` Burrowed date: ${book.burrowedDate}`}</h4>
-                  <Button onClick={() => console.log("Clicked Return")}>
+                  <Button onClick={() => setShowReturnConfirmation(true)}>
                     Return
                   </Button>
                 </>
@@ -134,6 +142,12 @@ const Book = ({ id, handleBackClick }) => {
         detailText="Are you sure you want to delete this book? This action can't be undone."
       />
       <LendDialog handleClose={handleLend} show={showLendConfirmation} />
+      <ConfirmationDialog
+        handleClose={handleDelete}
+        show={showDeleteConfirmation}
+        headerText="Confirm Book return"
+        detailText="Press 'Confirm' to return book"
+      />
     </>
   );
 };
