@@ -94,8 +94,8 @@ const Book = ({ id, handleBackClick }) => {
                   ""
                 ) : (
                   <>
-                    <h4>{` Burrowed by: ${book.burrowedMemberId}`}</h4>
-                    <h4>{` Burrowed date: ${book.burrowedDate}`}</h4>
+                    <h4>{` Borrowed by: ${book.burrowedMemberId}`}</h4>
+                    <h4>{` Borrowed date: ${book.burrowedDate}`}</h4>
                   </>
                 )}
               </ContainerInlineTextAlignLeft>
@@ -122,8 +122,6 @@ const Book = ({ id, handleBackClick }) => {
                 </>
               ) : (
                 <>
-                  <h4>{` Burrowed by: ${book.burrowedMemberId}`}</h4>
-                  <h4>{` Burrowed date: ${book.burrowedDate}`}</h4>
                   <Button onClick={() => setShowReturnConfirmation(true)}>
                     Return
                   </Button>
@@ -143,8 +141,8 @@ const Book = ({ id, handleBackClick }) => {
       />
       <LendDialog handleClose={handleLend} show={showLendConfirmation} />
       <ConfirmationDialog
-        handleClose={handleDelete}
-        show={showDeleteConfirmation}
+        handleClose={handleReturn}
+        show={showReturnConfirmation}
         headerText="Confirm Book return"
         detailText="Press 'Confirm' to return book"
       />
