@@ -31,3 +31,19 @@ export const putRequest = async (url, data) => {
     };
   }
 };
+
+export const deleteRequest = async (url) => {
+  try {
+    let response = await axios.delete(url);
+
+    return {
+      data: response.data,
+      error: null,
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: error,
+    };
+  }
+};
