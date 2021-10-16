@@ -68,7 +68,6 @@ const Book = ({ id, handleBackClick }) => {
       deleteBook(book.id)
         .then((response) => {
           if (!response.error) {
-            console.log(response.data);
             dispatch(deleteBookStore(response.data));
           }
         })
@@ -88,7 +87,6 @@ const Book = ({ id, handleBackClick }) => {
       lendBook(book.id, memberId, getTodayDate())
         .then((response) => {
           if (!response.error) {
-            console.log(response.data);
             dispatch(updateBook(response.data));
           }
         })
@@ -108,7 +106,6 @@ const Book = ({ id, handleBackClick }) => {
       returnBook(book.id)
         .then((response) => {
           if (!response.error) {
-            console.log(response.data);
             dispatch(updateBook(response.data));
           }
         })
