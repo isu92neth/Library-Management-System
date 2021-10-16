@@ -6,7 +6,7 @@ import {
 } from "../../../components/CommonComponents";
 import { DialogBox, Modal } from "../../../components/Modal";
 
-import Input from "../../../components/Input";
+import Input from "../../../components/input";
 
 export default function AddBookDialog({ handleClose, show }) {
   const [title, setTitle] = useState("");
