@@ -56,9 +56,6 @@ const Book = ({ id, handleBackClick }) => {
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => {
-          setIsLoading(false);
         });
     }
     setShowDeleteConfirmation(false);
