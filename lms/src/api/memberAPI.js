@@ -1,4 +1,4 @@
-export const getMembers = () => [
+let members = [
   {
     id: "1",
     nic: "977685553V",
@@ -24,3 +24,10 @@ export const getMembers = () => [
     address: "No. 33/87, 2nd Lane, Manikhinne, Kandy",
   },
 ];
+
+export const getMembers = () => members;
+
+export const getMember = (id) => {
+  const member = members.find((member) => member.id === id);
+  return member;
+};

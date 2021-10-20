@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Table from "../../../components/Table";
 import { FluidContainer } from "../../../components/CommonComponents";
 
+import Member from "./Member";
+
 const Members = ({ catalog }) => {
-  const upCatalog = [
-    ...catalog,
-    {
-      id: "4",
-      nic: "955685553V",
-      firstName: "Kau",
-      lastName: "Maheeka",
-      contactNumber: "077-2335648",
-      address: "No. 33/87, 2nd Lane, Manikhinne, Kandy",
-    },
-  ];
-  return (
+  const [selectedMemberId, setSelectedMemberId] = useState(null);
+
+  const handleTableRowClick = (id) => {
+    setSelectedMemberId(id);
+  };
+
+  const handleMemberViewBackClick = () => {
+    setSelectedMemberId(null);
+  };
+
+  return selectedMemberId === null ? (
     <FluidContainer>
-      <Table data={upCatalog} />
+      <Table
+        data={catalog}
+        handleRowClick={handleTableRowClick}
+        instruction="Click row to view member!"
+      />
     </FluidContainer>
+  ) : (
+    <Member id={selectedMemberId} handleBackClick={handleMemberViewBackClick} />
   );
 };
 

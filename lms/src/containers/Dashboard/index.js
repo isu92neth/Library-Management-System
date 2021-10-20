@@ -13,7 +13,7 @@ import { getMembers } from "../../api/memberAPI";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState(null);
 
   const books = useSelector((state) => state.books.value);
   const dispatch = useDispatch();
