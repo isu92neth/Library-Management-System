@@ -31,3 +31,25 @@ export const getMember = (id) => {
   const member = members.find((member) => member.id === id);
   return member;
 };
+
+export const deleteMember = (id) => {
+  members = members.filter((member) => member.id !== id);
+  console.log(members);
+  return id;
+};
+
+export const addMember = (data) => {
+  const { nic, firstName, lastName, contactNumber, address } = data;
+
+  const member = {
+    id: Math.random().toString(16).slice(2),
+    nic,
+    firstName,
+    lastName,
+    contactNumber,
+    address,
+  };
+  members.push(member);
+  console.log(members);
+  return member;
+};

@@ -13,12 +13,14 @@ export default function AddMemberDialog({ handleClose, show }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [contactNumber, setContactNum] = useState("");
+  const [address, setAddress] = useState("");
 
   const clearInputs = () => {
     setNIC("");
     setFirstName("");
     setLastName("");
     setContactNum("");
+    setAddress("");
   };
 
   const sendDone = () => {
@@ -26,9 +28,10 @@ export default function AddMemberDialog({ handleClose, show }) {
       nic !== "" &&
       firstName !== "" &&
       lastName !== "" &&
-      contactNumber !== ""
+      contactNumber !== "" &&
+      address !== ""
     ) {
-      const data = { nic, firstName, lastName, contactNumber };
+      const data = { nic, firstName, lastName, contactNumber, address };
       clearInputs();
       handleClose(true, data);
     } else if (nic === "") {
@@ -40,7 +43,7 @@ export default function AddMemberDialog({ handleClose, show }) {
     } else if (contactNumber === "") {
       window.alert("Please enter the Contact Number");
     } else {
-      window.alert("Please enter the author of the book to add");
+      window.alert("Please enter the Address");
     }
   };
 
@@ -92,6 +95,16 @@ export default function AddMemberDialog({ handleClose, show }) {
             type="text"
             id="contactNumber"
             name="contactNumber"
+            required
+            minLength="1"
+          />
+          <Input
+            label="Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            type="textarea"
+            id="address"
+            name="address"
             required
             minLength="1"
           />
