@@ -37,7 +37,6 @@ const Dashboard = () => {
   useEffect(() => {
     setIsLoading(true);
     setMembers(getMembers());
-    console.log(getMembers());
   }, []);
 
   const contents = [

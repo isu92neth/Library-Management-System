@@ -38,7 +38,6 @@ const Member = ({ id, handleBackClick }) => {
   useEffect(() => {
     setIsLoading(true);
     setMember(getMember(id));
-    console.log(getMember(id));
     setIsLoading(false);
   }, [id]);
 

@@ -25,7 +25,9 @@ let members = [
   },
 ];
 
-export const getMembers = () => members;
+export const getMembers = () => {
+  return members;
+};
 
 export const getMember = (id) => {
   const member = members.find((member) => member.id === id);
@@ -33,8 +35,9 @@ export const getMember = (id) => {
 };
 
 export const deleteMember = (id) => {
-  members = members.filter((member) => member.id !== id);
-  console.log(members);
+  const index = members.findIndex((member) => member.id === id);
+  members.splice(index, 1);
+
   return id;
 };
 
@@ -50,6 +53,6 @@ export const addMember = (data) => {
     address,
   };
   members.push(member);
-  console.log(members);
+
   return member;
 };
