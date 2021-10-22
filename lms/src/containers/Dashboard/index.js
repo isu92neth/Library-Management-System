@@ -5,12 +5,15 @@ import Tabs from "../../components/Tabs";
 import Spinner from "../../components/Spinner";
 
 import Books from "./Books/index";
+import Members from "./Members/index";
 
 import { setBooks } from "../../store/booksSlice";
 import { getBooks } from "../../api/bookAPI";
+import { getMembers } from "../../api/memberAPI";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [members, setMembers] = useState(null);
 
   const books = useSelector((state) => state.books.value);
   const dispatch = useDispatch();
@@ -31,9 +34,14 @@ const Dashboard = () => {
       });
   }, [dispatch]);
 
+  useEffect(() => {
+    setIsLoading(true);
+    setMembers(getMembers());
+  }, []);
+
   const contents = [
     { title: "Books", elements: <Books catalog={books} /> },
-    { title: "Members", elements: <h1>Contents of Members!</h1> },
+    { title: "Members", elements: <Members catalog={members} /> },
   ];
 
   return isLoading ? <Spinner /> : <Tabs contents={contents} />;

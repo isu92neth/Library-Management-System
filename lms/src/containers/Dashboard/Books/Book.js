@@ -14,7 +14,7 @@ import ConfirmationDialog from "../../../components/ConfirmationDialog";
 import LendDialog from "./LendDialog";
 
 import { lendBook, returnBook, deleteBook } from "../../../api/bookAPI";
-import BookCoverPlaceHplder from "../../../shared/bookCover.png";
+import BookCoverPlaceHplder from "../../../shared/bookCover.jpg";
 import { getTodayDate } from "../../../shared/utils";
 import {
   updateBook,
@@ -130,7 +130,7 @@ const Book = ({ id, handleBackClick }) => {
                 <img
                   src={BookCoverPlaceHplder}
                   alt="Book Cover Placeholder"
-                  style={{ width: "20em" }}
+                  style={{ width: "25em" }}
                 />
               </ContainerInline>
             </FlexRow>
