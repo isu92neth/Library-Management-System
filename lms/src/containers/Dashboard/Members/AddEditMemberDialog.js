@@ -8,12 +8,25 @@ import { DialogBox, Modal } from "../../../components/Modal";
 
 import Input from "../../../components/input";
 
-export default function AddMemberDialog({ handleClose, show }) {
-  const [nic, setNIC] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [contactNumber, setContactNum] = useState("");
-  const [address, setAddress] = useState("");
+export default function AddEditMemberDialog({
+  isEdit = false,
+  handleClose,
+  show,
+  data,
+}) {
+  const [nic, setNIC] = useState(isEdit && data && data.nic ? data.nic : "");
+  const [firstName, setFirstName] = useState(
+    isEdit && data && data.firstName ? data.firstName : ""
+  );
+  const [lastName, setLastName] = useState(
+    isEdit && data && data.lastName ? data.lastName : ""
+  );
+  const [contactNumber, setContactNum] = useState(
+    isEdit && data && data.contactNumber ? data.contactNumber : ""
+  );
+  const [address, setAddress] = useState(
+    isEdit && data && data.address ? data.address : ""
+  );
 
   const clearInputs = () => {
     setNIC("");
@@ -35,27 +48,31 @@ export default function AddMemberDialog({ handleClose, show }) {
       clearInputs();
       handleClose(true, data);
     } else if (nic === "") {
-      window.alert("Please enter the NIC");
+      window.alert(`Please enter the NIC to ${isEdit ? "edit" : "add"}.`);
     } else if (firstName === "") {
-      window.alert("Please enter the First Name");
+      window.alert(
+        `Please enter the First Name to ${isEdit ? "edit" : "add"}.`
+      );
     } else if (lastName === "") {
-      window.alert("Please enter the Last Name");
+      window.alert(`Please enter the Last Name to ${isEdit ? "edit" : "add"}.`);
     } else if (contactNumber === "") {
-      window.alert("Please enter the Contact Number");
+      window.alert(
+        `Please enter the Contact Number to ${isEdit ? "edit" : "add"}.`
+      );
     } else {
-      window.alert("Please enter the Address");
+      window.alert(`Please enter the Address to ${isEdit ? "edit" : "add"}.`);
     }
   };
 
   const sendCancel = () => {
-    clearInputs();
+    !isEdit && clearInputs();
     handleClose(false, null);
   };
 
   return (
     <Modal show={show}>
       <DialogBox>
-        <h2>Add Member</h2>
+        <h2>{`${isEdit ? "Edit" : "Add"} Member`}</h2>
         <p>Enter the below details of the member</p>
         <Container alignItems="center" disableFullWidth>
           <Input
