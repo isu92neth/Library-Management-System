@@ -9,7 +9,7 @@ import {
 } from "../../../components/CommonComponents";
 
 import Member from "./Member";
-import AddMemberDialog from "./AddMemberDialog";
+import AddEditMemberDialog from "./AddEditMemberDialog";
 
 import { addMember } from "../../../api/memberAPI";
 
@@ -50,7 +50,7 @@ const Members = ({ catalog }) => {
           instruction="Click row to view member!"
         />
       </FluidContainer>
-      <AddMemberDialog
+      <AddEditMemberDialog
         show={showAddMemberDialog}
         handleClose={handleAddMember}
       />

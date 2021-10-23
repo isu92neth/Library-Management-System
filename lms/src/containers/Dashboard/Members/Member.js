@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
 import styled from "styled-components";
 
-import { deleteMember, getMember } from "../../../api/memberAPI";
+import { deleteMember, getMember, editMember } from "../../../api/memberAPI";
 import {
   Button,
   Container,
@@ -11,6 +11,7 @@ import {
 } from "../../../components/CommonComponents";
 import ConfirmationDialog from "../../../components/ConfirmationDialog";
 import Spinner from "../../../components/Spinner";
+import AddEditMemberDialog from "./AddEditMemberDialog";
 
 import UserProfilePlaceHolder from "../../../shared/userProfile.jpg";
 
@@ -34,6 +35,7 @@ const Member = ({ id, handleBackClick }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [member, setMember] = useState(null);
+  const [showEditMemberDialog, setShowEditMemberDialog] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -48,6 +50,16 @@ const Member = ({ id, handleBackClick }) => {
       setIsLoading(false);
     }
     setShowDeleteConfirmation(false);
+  };
+
+  const handleEdit = (confirmation, data) => {
+    if (confirmation) {
+      setIsLoading(true);
+      editMember(member.id, data);
+      console.log(data);
+      setIsLoading(false);
+    }
+    setShowEditMemberDialog(false);
   };
 
   return (
@@ -74,6 +86,9 @@ const Member = ({ id, handleBackClick }) => {
               </ContainerInline>
             </FlexRow>
             <FlexRow>
+              <Button onClick={() => setShowEditMemberDialog(true)}>
+                Edit
+              </Button>
               <Button
                 color="danger"
                 onClick={() => setShowDeleteConfirmation(true)}
@@ -91,6 +106,12 @@ const Member = ({ id, handleBackClick }) => {
         show={showDeleteConfirmation}
         headerText="Confirm Member deletion"
         detailText="Are you sure you want to delete this member? This action can't be undone."
+      />
+      <AddEditMemberDialog
+        isEdit={true}
+        show={showEditMemberDialog}
+        handleClose={handleEdit}
+        data={member}
       />
     </>
   );

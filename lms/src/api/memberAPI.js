@@ -56,3 +56,19 @@ export const addMember = (data) => {
 
   return member;
 };
+
+export const editMember = (id, data) => {
+  const { nic, firstName, lastName, contactNumber, address } = data;
+
+  const memberIndex = members.findIndex((member) => member.id === id);
+  members[memberIndex] = {
+    ...members[memberIndex],
+    nic,
+    firstName,
+    lastName,
+    contactNumber,
+    address,
+  };
+
+  return members[memberIndex];
+};
