@@ -76,6 +76,7 @@ const Member = ({ id, handleBackClick }) => {
                 <H2>{`NIC: ${member.nic}`}</H2>
                 <H3>{`Contact Number: ${member.contactNumber}`}</H3>
                 <H3>{`Address: ${member.address}`}</H3>
+                <H3>{`User Type: ${member.userType}`}</H3>
               </ContainerInlineTextAlignLeft>
               <ContainerInline>
                 <img

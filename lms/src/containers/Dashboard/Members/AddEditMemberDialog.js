@@ -7,6 +7,7 @@ import {
 import { DialogBox, Modal } from "../../../components/Modal";
 
 import Input from "../../../components/input";
+import Radio from "../../../components/radio";
 
 export default function AddEditMemberDialog({
   isEdit = false,
@@ -27,6 +28,9 @@ export default function AddEditMemberDialog({
   const [address, setAddress] = useState(
     isEdit && data && data.address ? data.address : ""
   );
+  const [userType, setUserType] = useState(
+    isEdit && data && data.userType ? data.userType : ""
+  );
 
   const clearInputs = () => {
     setNIC("");
@@ -34,6 +38,7 @@ export default function AddEditMemberDialog({
     setLastName("");
     setContactNum("");
     setAddress("");
+    setUserType("");
   };
 
   const sendDone = () => {
@@ -42,9 +47,17 @@ export default function AddEditMemberDialog({
       firstName !== "" &&
       lastName !== "" &&
       contactNumber !== "" &&
-      address !== ""
+      address !== "" &&
+      userType !== ""
     ) {
-      const data = { nic, firstName, lastName, contactNumber, address };
+      const data = {
+        nic,
+        firstName,
+        lastName,
+        contactNumber,
+        address,
+        userType,
+      };
       clearInputs();
       handleClose(true, data);
     } else if (nic === "") {
@@ -59,8 +72,12 @@ export default function AddEditMemberDialog({
       window.alert(
         `Please enter the Contact Number to ${isEdit ? "edit" : "add"}.`
       );
-    } else {
+    } else if (address === "") {
       window.alert(`Please enter the Address to ${isEdit ? "edit" : "add"}.`);
+    } else {
+      window.alert(
+        `Please select the User Type to ${isEdit ? "edit" : "add"}.`
+      );
     }
   };
 
@@ -74,8 +91,9 @@ export default function AddEditMemberDialog({
       <DialogBox>
         <h2>{`${isEdit ? "Edit" : "Add"} Member`}</h2>
         <p>Enter the below details of the member</p>
-        <Container alignItems="center" disableFullWidth>
+        <Container alignItems="center" disableFullWidth paddingAmount="0.2em">
           <Input
+            paddingMemberInput="0.3em"
             label="NIC"
             value={nic}
             onChange={(e) => setNIC(e.target.value)}
@@ -86,6 +104,7 @@ export default function AddEditMemberDialog({
             minLength="1"
           />
           <Input
+            paddingMemberInput="0.3em"
             label="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -96,6 +115,7 @@ export default function AddEditMemberDialog({
             minLength="1"
           />
           <Input
+            paddingMemberInput="0.3em"
             label="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -106,6 +126,7 @@ export default function AddEditMemberDialog({
             minLength="1"
           />
           <Input
+            paddingMemberInput="0.3em"
             label="Contact Number"
             value={contactNumber}
             onChange={(e) => setContactNum(e.target.value)}
@@ -116,6 +137,7 @@ export default function AddEditMemberDialog({
             minLength="1"
           />
           <Input
+            paddingMemberInput="0.3em"
             label="Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -125,6 +147,33 @@ export default function AddEditMemberDialog({
             required
             minLength="1"
           />
+
+          <FlexRow>
+            <Radio
+              label="University"
+              value="University"
+              onChange={(e) => setUserType(e.target.value)}
+              type="radio"
+              id="university"
+              name="userType"
+            />
+            <Radio
+              label="School"
+              value="School"
+              onChange={(e) => setUserType(e.target.value)}
+              type="radio"
+              id="school"
+              name="userType"
+            />
+            <Radio
+              label="Employed"
+              value="Employed"
+              onChange={(e) => setUserType(e.target.value)}
+              type="radio"
+              id="employed"
+              name="userType"
+            />
+          </FlexRow>
         </Container>
         <FlexRow>
           <Button onClick={sendDone}>Done</Button>
