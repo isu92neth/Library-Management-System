@@ -25,9 +25,7 @@ let members = [
   },
 ];
 
-export const getMembers = () => {
-  return members;
-};
+export const getMembers = () => members;
 
 export const getMember = (id) => {
   const member = members.find((member) => member.id === id);
