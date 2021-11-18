@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { deleteMember, getMember, editMember } from "../../../api/memberAPI";
+import { deleteMember as deleteMemberStore } from "../../../store/membersSlice";
 import {
   Button,
   Container,
@@ -45,8 +46,16 @@ const Member = ({ id, handleBackClick }) => {
   const handleDelete = (confirmation) => {
     if (confirmation) {
       setIsLoading(true);
-      deleteMember(member.id);
-      setIsLoading(false);
+      deleteMember(member.id)
+        .then((response) => {
+          if (!response.error) {
+            dispatch(deleteMemberStore(response.data));
+            handleBackClick();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
     setShowDeleteConfirmation(false);
   };

@@ -12,7 +12,7 @@ server.use(express.json());
 
 server.use(cors());
 
-/* ***************Books***************** */
+/* *************** Books ***************** */
 let books = [
   {
     id: "1",
@@ -114,7 +114,7 @@ server.delete("/book/:id", (req, res) => {
   res.send(id);
 });
 
-/* ***************Members***************** */
+/* *************** Members ***************** */
 let members = [
   {
     id: "1",
@@ -137,7 +137,7 @@ let members = [
   {
     id: "3",
     nic: "957585553V",
-    firstName: "Nimali",
+    firstName: "Sachini",
     lastName: "Herath",
     contactNumber: "077-2335668",
     address: "No. 33/87, 2nd Lane, Manikhinne, Kandy",
@@ -173,4 +173,12 @@ server.post("/member", (req, res) => {
   };
   members.push(member);
   res.send(member);
+});
+
+// /member/:id : Delete a member
+server.delete("/member/:id", (req, res) => {
+  const id = req.params.id;
+
+  members = members.filter((member) => member.id !== id);
+  res.send(id);
 });
