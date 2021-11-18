@@ -74,7 +74,7 @@ export default function AddEditMemberDialog({
       );
     } else if (address === "") {
       window.alert(`Please enter the Address to ${isEdit ? "edit" : "add"}.`);
-    } else {
+    } else if (userType === "") {
       window.alert(
         `Please select the User Type to ${isEdit ? "edit" : "add"}.`
       );
@@ -156,6 +156,8 @@ export default function AddEditMemberDialog({
               type="radio"
               id="university"
               name="userType"
+              required
+              checked={`${userType === "University" ? "checked" : ""}`}
             />
             <Radio
               label="School"
@@ -164,6 +166,7 @@ export default function AddEditMemberDialog({
               type="radio"
               id="school"
               name="userType"
+              checked={`${userType === "School" ? "checked" : ""}`}
             />
             <Radio
               label="Employed"
@@ -172,6 +175,7 @@ export default function AddEditMemberDialog({
               type="radio"
               id="employed"
               name="userType"
+              checked={`${userType === "Employed" ? "checked" : ""}`}
             />
           </FlexRow>
         </Container>
