@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { deleteMember, getMember, editMember } from "../../../api/memberAPI";
@@ -34,14 +35,12 @@ const H3 = styled.h3`
 const Member = ({ id, handleBackClick }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-  const [member, setMember] = useState(null);
   const [showEditMemberDialog, setShowEditMemberDialog] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(true);
-    setMember(getMember(id));
-    setIsLoading(false);
-  }, [id]);
+  const members = useSelector((state) => state.members.value);
+  const member = members.find((element) => element.id === id);
+
+  const dispatch = useDispatch();
 
   const handleDelete = (confirmation) => {
     if (confirmation) {

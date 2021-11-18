@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+
 import React, { useState, useEffect } from "react";
 import { Button, FlexRow, Select } from "../../../components/CommonComponents";
 import { DialogBox, Modal } from "../../../components/Modal";
@@ -19,12 +21,23 @@ export default function LendDialog({ handleClose, show }) {
   };
   const sendCancel = () => handleClose(false, null);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setIsLoading(true);
-    const response = getMembers();
-    setMembers(response);
-    setIsLoading(false);
-  }, []);
+    getMembers()
+      .then((response) => {
+        if (!response.error) {
+          dispatch(setMembers(response.data));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [dispatch]);
 
   return (
     <Modal show={show}>

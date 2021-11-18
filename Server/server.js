@@ -12,6 +12,7 @@ server.use(express.json());
 
 server.use(cors());
 
+/* ***************Books***************** */
 let books = [
   {
     id: "1",
@@ -111,4 +112,47 @@ server.delete("/book/:id", (req, res) => {
 
   books = books.filter((book) => book.id !== id);
   res.send(id);
+});
+
+/* ***************Members***************** */
+let members = [
+  {
+    id: "1",
+    nic: "977685553V",
+    firstName: "Isurika",
+    lastName: "Adikari",
+    contactNumber: "077-9887895",
+    address: "No. 45/23, Malwatte Road, Kandy",
+    userType: "University",
+  },
+  {
+    id: "2",
+    nic: "955685553V",
+    firstName: "Nethmini",
+    lastName: "Maheeka",
+    contactNumber: "077-2335648",
+    address: "No. 55/22, 1st Lane, Watapuluwa, Colombo",
+    userType: "School",
+  },
+  {
+    id: "3",
+    nic: "957585553V",
+    firstName: "Nimali",
+    lastName: "Herath",
+    contactNumber: "077-2335668",
+    address: "No. 33/87, 2nd Lane, Manikhinne, Kandy",
+    userType: "Employed",
+  },
+];
+
+// /member: view all members
+server.get("/member", (req, res) => {
+  res.send(members);
+});
+
+// /member:id : View a member
+server.get("/member/:id", (req, res) => {
+  const id = req.params.id;
+  const member = members.find((member) => member.id === id);
+  res.send(member);
 });
