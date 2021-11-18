@@ -156,3 +156,21 @@ server.get("/member/:id", (req, res) => {
   const member = members.find((member) => member.id === id);
   res.send(member);
 });
+
+// /member : POST: Create member
+server.post("/member", (req, res) => {
+  const { nic, firstName, lastName, contactNumber, address, userType } =
+    req.body;
+
+  const member = {
+    id: Math.random().toString(16).slice(2),
+    nic,
+    firstName,
+    lastName,
+    contactNumber,
+    address,
+    userType,
+  };
+  members.push(member);
+  res.send(member);
+});

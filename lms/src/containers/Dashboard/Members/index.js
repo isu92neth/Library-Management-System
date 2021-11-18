@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoAddSharp } from "react-icons/io5";
+import { useDispatch } from "react-redux";
 
 import Table from "../../../components/Table";
 import {
@@ -12,10 +13,13 @@ import Member from "./Member";
 import AddEditMemberDialog from "./AddEditMemberDialog";
 
 import { addMember } from "../../../api/memberAPI";
+import { addMember as addMemberStore } from "../../../store/membersSlice";
 
 const Members = ({ catalog }) => {
   const [selectedMemberId, setSelectedMemberId] = useState(null);
   const [showAddMemberDialog, setShowAddMemberDialog] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleTableRowClick = (id) => {
     setSelectedMemberId(id);
@@ -27,7 +31,15 @@ const Members = ({ catalog }) => {
 
   const handleAddMember = (confirmed, data) => {
     if (confirmed) {
-      addMember(data);
+      addMember(data)
+        .then((response) => {
+          if (!response.error) {
+            dispatch(addMemberStore(response.data));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
     setShowAddMemberDialog(false);
   };
