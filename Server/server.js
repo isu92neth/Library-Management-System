@@ -175,6 +175,26 @@ server.post("/member", (req, res) => {
   res.send(member);
 });
 
+// /member/:id : Edit a member
+server.put("/member/:id", (req, res) => {
+  const id = req.params.id;
+  const { nic, firstName, lastName, contactNumber, address, userType } =
+    req.body;
+
+  const memberIndex = members.findIndex((member) => member.id === id);
+  members[memberIndex] = {
+    ...members[memberIndex],
+    nic,
+    firstName,
+    lastName,
+    contactNumber,
+    address,
+    userType,
+  };
+
+  res.send(members[memberIndex]);
+});
+
 // /member/:id : Delete a member
 server.delete("/member/:id", (req, res) => {
   const id = req.params.id;

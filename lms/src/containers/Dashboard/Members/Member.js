@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { deleteMember, getMember, editMember } from "../../../api/memberAPI";
-import { deleteMember as deleteMemberStore } from "../../../store/membersSlice";
+import { deleteMember, editMember } from "../../../api/memberAPI";
+import {
+  updateMember,
+  deleteMember as deleteMemberStore,
+} from "../../../store/membersSlice";
+
 import {
   Button,
   Container,
@@ -60,12 +64,21 @@ const Member = ({ id, handleBackClick }) => {
     setShowDeleteConfirmation(false);
   };
 
-  const handleEdit = (confirmation, data) => {
-    if (confirmation) {
+  const handleEdit = (confirmed, data) => {
+    if (confirmed) {
       setIsLoading(true);
-      editMember(member.id, data);
-      console.log(data);
-      setIsLoading(false);
+      editMember(member.id, data)
+        .then((response) => {
+          if (!response.error) {
+            dispatch(updateMember(response.data));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
     setShowEditMemberDialog(false);
   };
