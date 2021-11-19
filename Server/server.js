@@ -133,8 +133,9 @@ server.delete("/book/:id", async (req, res) => {
 const convertToMember = (member) => {
   return {
     id: member._id,
+    nic: member.nic,
     firstName: member.firstName,
-    lastNamer: member.lastName,
+    lastName: member.lastName,
     contactNumber: member.contactNumber,
     address: member.address,
     userType: member.userType,
