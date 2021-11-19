@@ -10,7 +10,8 @@ const server = express();
 dotenv.config();
 
 const PORT = process.env.PORT || 8080;
-const databaseURL = process.env.DB_URL;
+const databaseURL =
+  "mongodb+srv://lmsUser0:lms123%2Aisu@cluster0.mnb0k.mongodb.net/lms?retryWrites=true&w=majority";
 
 mongoose
   .connect(databaseURL, {
@@ -34,18 +35,37 @@ server.use(cors());
 
 /* *************** Books ***************** */
 
+const convertToBook = (book) => {
+  return {
+    id: book._id,
+    title: book.title,
+    author: book.author,
+    isAvailable: book.isAvailable,
+    burrowedMemberId: book.burrowedMemberId,
+    burrowedDate: book.burrowedDate,
+  };
+};
+
+const sendBook = async (res, id) => {
+  const book = await Book.findById(id);
+
+  res.send(convertToBook(book));
+};
+
 // /book: view all books
 server.get("/book", async (req, res) => {
   const books = await Book.find();
-  res.send(books);
+  res.send(
+    books.map((book) => {
+      return convertToBook(book);
+    })
+  );
 });
 
 // /book:id : View a book
 server.get("/book/:id", async (req, res) => {
   const id = req.params.id;
-  const book = await Book.findById(id);
-
-  res.send(book);
+  sendBook(res, id);
 });
 
 // /book : POST: Create book
@@ -56,7 +76,7 @@ server.post("/book", async (req, res) => {
 
   const response = await book.save();
 
-  res.send(response);
+  res.send(convertToBook(response));
 });
 
 // /book/:id : Edit a book
@@ -69,7 +89,7 @@ server.put("/book/:id", async (req, res) => {
     author,
   });
 
-  res.send(book);
+  sendBook(res, id);
 });
 
 // /book/:id/burrow : Burrow a book
@@ -83,7 +103,7 @@ server.put("/book/:id/burrow", async (req, res) => {
     burrowedDate,
   });
 
-  res.send(book);
+  sendBook(res, id);
 });
 
 // /book/:id/return : Return a book
@@ -96,7 +116,7 @@ server.put("/book/:id/return", async (req, res) => {
     burrowedDate: "",
   });
 
-  res.send(book);
+  sendBook(res, id);
 });
 
 // /book/:id : Delete a book

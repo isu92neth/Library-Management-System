@@ -13,12 +13,15 @@ const bookSchema = new Schema({
   },
   isAvailable: {
     type: Boolean,
+    default: true,
   },
   burrowedMemberId: {
     type: String,
+    default: "",
   },
   burrowedDate: {
     type: String,
+    default: "",
   },
 });
 
