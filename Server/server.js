@@ -3,12 +3,13 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-import Book from "./models/book";
-import Member from "./models/member";
+import Book from "./models/book.js";
+import Member from "./models/member.js";
 
 const server = express();
 dotenv.config();
 
+const PORT = process.env.PORT || 8080;
 const databaseURL = process.env.DB_URL;
 
 mongoose
@@ -18,8 +19,8 @@ mongoose
   })
   .then((result) => {
     console.log("Connected to DB");
-    server.listen(8080, () => {
-      console.log("Server listening on port 8080");
+    server.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
     });
   })
   .catch((err) => {
@@ -43,6 +44,7 @@ server.get("/book", async (req, res) => {
 server.get("/book/:id", async (req, res) => {
   const id = req.params.id;
   const book = await Book.findById(id);
+
   res.send(book);
 });
 
@@ -51,7 +53,9 @@ server.get("/book/:id", async (req, res) => {
 server.post("/book", async (req, res) => {
   const { title, author } = req.body;
   const book = new Book({ title, author });
+
   const response = await book.save();
+
   res.send(response);
 });
 
@@ -64,6 +68,7 @@ server.put("/book/:id", async (req, res) => {
     title,
     author,
   });
+
   res.send(book);
 });
 
@@ -77,6 +82,7 @@ server.put("/book/:id/burrow", async (req, res) => {
     burrowedMemberId,
     burrowedDate,
   });
+
   res.send(book);
 });
 
@@ -89,6 +95,7 @@ server.put("/book/:id/return", async (req, res) => {
     burrowedMemberId: "",
     burrowedDate: "",
   });
+
   res.send(book);
 });
 
@@ -97,6 +104,7 @@ server.delete("/book/:id", async (req, res) => {
   const id = req.params.id;
 
   const book = await Book.findByIdAndDelete(id);
+
   res.send(book);
 });
 
@@ -116,7 +124,7 @@ server.get("/member/:id", async (req, res) => {
 });
 
 // /member : POST: Create member
-server.post("/member", (req, res) => {
+server.post("/member", async (req, res) => {
   const { nic, firstName, lastName, contactNumber, address, userType } =
     req.body;
 
@@ -133,7 +141,7 @@ server.post("/member", (req, res) => {
 });
 
 // /member/:id : Edit a member
-server.put("/member/:id", (req, res) => {
+server.put("/member/:id", async (req, res) => {
   const id = req.params.id;
   const { nic, firstName, lastName, contactNumber, address, userType } =
     req.body;
@@ -150,7 +158,7 @@ server.put("/member/:id", (req, res) => {
 });
 
 // /member/:id : Delete a member
-server.delete("/member/:id", (req, res) => {
+server.delete("/member/:id", async (req, res) => {
   const id = req.params.id;
 
   const member = await Member.findByIdAndDelete(id);

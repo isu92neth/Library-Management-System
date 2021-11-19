@@ -74,15 +74,15 @@ const TableMarkup = ({ titles, data, handleClick, caption }) => (
 );
 
 const Table = ({ data, handleRowClick, instruction }) =>
-  data ? (
+  data === null || data.length === 0 ? (
+    "No data to populate!"
+  ) : (
     <TableMarkup
       titles={Object.keys(data[0])}
       data={data}
       handleClick={handleRowClick ? handleRowClick : () => {}}
       caption={instruction ? instruction : ""}
     />
-  ) : (
-    "No data to populate!"
   );
 
 export default Table;
