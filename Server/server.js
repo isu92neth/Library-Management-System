@@ -10,8 +10,7 @@ const server = express();
 dotenv.config();
 
 const PORT = process.env.PORT || 8080;
-const databaseURL =
-  "mongodb+srv://lmsUser0:lms123%2Aisu@cluster0.mnb0k.mongodb.net/lms?retryWrites=true&w=majority";
+const databaseURL = process.env.DB_URL;
 
 mongoose
   .connect(databaseURL, {
