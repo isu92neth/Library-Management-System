@@ -1,11 +1,27 @@
 import express from "express";
 import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 const server = express();
+dotenv.config();
 
-server.listen(8080, () => {
-  console.log("Server listening on port 8080");
-});
+const databaseURL = process.env.DB_URL;
+
+mongoose
+  .connect(databaseURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((result) => {
+    console.log("Connected to DB");
+    server.listen(8080, () => {
+      console.log("Server listening on port 8080");
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
