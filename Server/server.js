@@ -101,45 +101,17 @@ server.delete("/book/:id", async (req, res) => {
 });
 
 /* *************** Members ***************** */
-let members = [
-  {
-    id: "1",
-    nic: "977685553V",
-    firstName: "Isurika",
-    lastName: "Adikari",
-    contactNumber: "077-9887895",
-    address: "No. 45/23, Malwatte Road, Kandy",
-    userType: "University",
-  },
-  {
-    id: "2",
-    nic: "955685553V",
-    firstName: "Nethmini",
-    lastName: "Maheeka",
-    contactNumber: "077-2335648",
-    address: "No. 55/22, 1st Lane, Watapuluwa, Colombo",
-    userType: "School",
-  },
-  {
-    id: "3",
-    nic: "957585553V",
-    firstName: "Sachini",
-    lastName: "Herath",
-    contactNumber: "077-2335668",
-    address: "No. 33/87, 2nd Lane, Manikhinne, Kandy",
-    userType: "Employed",
-  },
-];
 
 // /member: view all members
-server.get("/member", (req, res) => {
+server.get("/member", async (req, res) => {
+  const members = await Member.find();
   res.send(members);
 });
 
 // /member:id : View a member
-server.get("/member/:id", (req, res) => {
+server.get("/member/:id", async (req, res) => {
   const id = req.params.id;
-  const member = members.find((member) => member.id === id);
+  const member = await Member.findById(id);
   res.send(member);
 });
 
@@ -148,17 +120,16 @@ server.post("/member", (req, res) => {
   const { nic, firstName, lastName, contactNumber, address, userType } =
     req.body;
 
-  const member = {
-    id: Math.random().toString(16).slice(2),
+  const member = new Member({
     nic,
     firstName,
     lastName,
     contactNumber,
     address,
     userType,
-  };
-  members.push(member);
-  res.send(member);
+  });
+  const response = await member.save();
+  res.send(response);
 });
 
 // /member/:id : Edit a member
@@ -167,24 +138,21 @@ server.put("/member/:id", (req, res) => {
   const { nic, firstName, lastName, contactNumber, address, userType } =
     req.body;
 
-  const memberIndex = members.findIndex((member) => member.id === id);
-  members[memberIndex] = {
-    ...members[memberIndex],
+  const member = await Member.findByIdAndUpdate(id, {
     nic,
     firstName,
     lastName,
     contactNumber,
     address,
     userType,
-  };
-
-  res.send(members[memberIndex]);
+  });
+  res.send(member);
 });
 
 // /member/:id : Delete a member
 server.delete("/member/:id", (req, res) => {
   const id = req.params.id;
 
-  members = members.filter((member) => member.id !== id);
-  res.send(id);
+  const member = await Member.findByIdAndDelete(id);
+  res.send(member);
 });
