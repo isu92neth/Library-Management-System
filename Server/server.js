@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import Book from "./models/book";
+import Member from "./models/member";
 
 const server = express();
 dotenv.config();
