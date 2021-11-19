@@ -130,17 +130,38 @@ server.delete("/book/:id", async (req, res) => {
 
 /* *************** Members ***************** */
 
+const convertToMember = (member) => {
+  return {
+    id: member._id,
+    firstName: member.firstName,
+    lastNamer: member.lastName,
+    contactNumber: member.contactNumber,
+    address: member.address,
+    userType: member.userType,
+  };
+};
+
+const sendMember = async (res, id) => {
+  const member = await Member.findById(id);
+
+  res.send(convertToMember(member));
+};
+
 // /member: view all members
 server.get("/member", async (req, res) => {
   const members = await Member.find();
-  res.send(members);
+
+  res.send(
+    members.map((member) => {
+      return convertToMember(member);
+    })
+  );
 });
 
 // /member:id : View a member
 server.get("/member/:id", async (req, res) => {
   const id = req.params.id;
-  const member = await Member.findById(id);
-  res.send(member);
+  sendMember(res, id);
 });
 
 // /member : POST: Create member
@@ -157,7 +178,7 @@ server.post("/member", async (req, res) => {
     userType,
   });
   const response = await member.save();
-  res.send(response);
+  res.send(convertToMember(response));
 });
 
 // /member/:id : Edit a member
@@ -174,7 +195,7 @@ server.put("/member/:id", async (req, res) => {
     address,
     userType,
   });
-  res.send(member);
+  sendMember(res, id);
 });
 
 // /member/:id : Delete a member
