@@ -8,7 +8,6 @@ import Member from "./models/member.js";
 
 const server = express();
 dotenv.config();
-console.log(process.env.NODE_ENV);
 
 const PORT = process.env.PORT || 8080;
 const databaseURL = process.env.MONGODB_URI;
