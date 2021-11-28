@@ -28,7 +28,7 @@ export default function LendDialog({ handleClose, show }) {
     getMembers()
       .then((response) => {
         if (!response.error) {
-          dispatch(setMembers(response.data));
+          setMembers(response.data);
         }
       })
       .catch((error) => {
@@ -37,7 +37,7 @@ export default function LendDialog({ handleClose, show }) {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [dispatch]);
+  }, []);
 
   return (
     <Modal show={show}>
