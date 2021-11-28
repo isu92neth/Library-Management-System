@@ -7,7 +7,14 @@ import Book from "./models/book.js";
 import Member from "./models/member.js";
 
 const server = express();
-dotenv.config();
+if (process.env.NODE_ENV) {
+  dotenv.config({
+    path: `./.env.${process.env.NODE_ENV}`,
+  });
+  dotenv.config({
+    path: `./.env`,
+  });
+}
 
 const PORT = process.env.PORT || 8080;
 const databaseURL = process.env.DB_URL;
